@@ -1,0 +1,21 @@
+@let displayedColumns = ['userName', 'firstName', 'personalId', 'phoneNumber',
+'gender', 'address'];
+
+<div class="container">
+  <app-custom-filter
+    [firstSelectOptions]="cities"
+    [secondSelectOptions]="genders"
+    [thirdSelectOptions]="orderBy"
+    [firstSelectControl]="filterControlsGroup.controls.city"
+    [secondSelectControl]="filterControlsGroup.controls.gender"
+    [thirdSelectControl]="filterControlsGroup.controls.orderBy"
+    [inputControl]="filterControlsGroup.controls.search"
+    (addCustomer)="addCustomer()"
+    placeholder="Search by name"
+  />
+  <app-table
+    [displayedColumns]="displayedColumns"
+    [dataSource]="customers"
+    (rowClick)="goToCustomer($event)"
+  />
+</div>

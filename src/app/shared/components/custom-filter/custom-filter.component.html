@@ -1,0 +1,31 @@
+<div class="filter-wrapper">
+  <select class="form-select" [formControl]="firstSelectControl">
+    @for (item of firstSelectOptions; track $index) {
+    <option value="{{ item.value }}">{{ item.name }}</option>
+    }
+  </select>
+
+  <select class="form-select" [formControl]="secondSelectControl">
+    @for (item of secondSelectOptions; track $index) {
+    <option value="{{ item.value }}">{{ item.name }}</option>
+    }
+  </select>
+
+  <select class="form-select" [formControl]="thirdSelectControl">
+    @for (item of thirdSelectOptions; track $index) {
+    <option value="{{ item.value }}">{{ item.name }}</option>
+    }
+  </select>
+
+  <input
+    type="text"
+    class="form-control"
+    [formControl]="inputControl"
+    [placeholder]="placeholder"
+  />
+
+  <button class="btn btn-primary" (click)="reset()">Reset</button>
+  <button class="btn btn-primary" (click)="addCustomer.emit()">
+    Add Customer
+  </button>
+</div>

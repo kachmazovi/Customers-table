@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="userForm">
+    @for (input of inputs; track $index) {
+    <div class="mb-3">
+      <input
+        [type]="input.type"
+        [placeholder]="input.placeholder"
+        [formControlName]="input.formControl"
+        [id]="input.id"
+        class="form-control"
+      />
+    </div>
+    }
+  </form>
+  @if(loginFailed()) {
+  <app-message-view type="error" [msg]="'Username or password incorrect'" />
+  }
+  <div class="buttons">
+    <button
+      [ngClass]="{ 'not-allowed': userForm.invalid }"
+      [disabled]="userForm.invalid"
+      (click)="login()"
+      class="btn btn-primary"
+    >
+      Login
+    </button>
+    <button routerLink="/register" class="btn btn-secondary">Register</button>
+  </div>
+</div>

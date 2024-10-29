@@ -1,0 +1,91 @@
+@if(router.url === '/customers') {
+<mat-icon (click)="closeDialog()" class="close">close</mat-icon>
+}
+
+<div class="container">
+  <form [formGroup]="customerInfo">
+    @for (input of inputs; track $index) {
+    <div class="mb-3">
+      <label class="form-label">{{ input.placeholder }}</label>
+      <input
+        [type]="input.type"
+        [formControlName]="input.formControl"
+        class="form-control"
+      />
+
+      @let form = customerInfo.get(input.formControl); @for (error of
+      formErrors; track $index) { @let minlength =
+      form?.errors?.['minlength']?.requiredLength; @let maxlength =
+      form?.errors?.['maxlength']?.requiredLength; @if(form?.touched &&
+      form?.hasError(error.type)) {
+      <app-message-view
+        type="error"
+        [msg]="
+          error.msg +
+          (error.type == 'minlength' || error.type == 'maxlength'
+            ? minlength || maxlength
+            : '')
+        "
+      />
+      } }
+    </div>
+    }
+
+    <div class="mb-3">
+      <input
+        checked
+        type="radio"
+        formControlName="gender"
+        name="gender"
+        id="male"
+        value="Male"
+        class="form-check-input"
+      />
+      <label for="male" class="form-check-label gender">Male</label>
+    </div>
+    <div class="mb-3">
+      <input
+        type="radio"
+        formControlName="gender"
+        name="gender"
+        id="female"
+        value="Female"
+        class="form-check-input"
+      />
+      <label for="female" class="form-check-label gender">Female</label>
+    </div>
+
+    @if(!imgUrl()) {
+    <div>
+      <input
+        (change)="upload($event)"
+        id="profile-picture"
+        type="file"
+        hidden
+      />
+      <label class="pointer" for="profile-picture">
+        ფოტოს ატვირთვა<mat-icon>cloud_upload</mat-icon>
+      </label>
+    </div>
+    } @if(imgUrl()) {
+    <div class="profie-img">
+      <img [src]="imgUrl()" alt="" />
+      <mat-icon class="pointer" (click)="remove()">delete_forever</mat-icon>
+    </div>
+    }
+  </form>
+
+  <div class="buttons">
+    @if(showLoginButton) {
+    <button routerLink="/login" class="btn btn-secondary">Login</button>
+    }
+    <button
+      [ngClass]="{ 'not-allowed': customerInfo.invalid }"
+      [disabled]="customerInfo.invalid"
+      (click)="registerCustomer()"
+      class="btn btn-primary"
+    >
+      Register
+    </button>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.list-table {
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+app-custom-filter {
+  display: block;
+  position: sticky;
+  top: 0px;
+  margin-bottom: 30px;
+  background-color: white;
+  border-bottom: 1px solid;
+  height: 150px;
+  padding: 50px 0;
+}
+
+::ng-deep {
+  table {
+    thead {
+      position: sticky;
+      top: 110px;
+    }
+
+    tbody {
+      tr {
+        cursor: pointer;
+
+        &:hover {
+          td {
+            background-color: lightgray;
+          }
+        }
+      }
+
+      tr:first-child {
+        position: sticky;
+        top: 150px;
+
+        td {
+          cursor: pointer;
+          background-color: lightblue;
+        }
+      }
+    }
+  }
+
+  .mat-mdc-dialog-surface {
+    background-color: white !important;
+    height: 500px !important;
+    padding: 0 20px !important;
+  }
+}

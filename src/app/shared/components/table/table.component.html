@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    @for (column of displayedColumns; track $index) {
+    <th scope="col">{{ column.toUpperCase() }}</th>
+    }
+  </thead>
+  <tbody>
+    @for (column of dataSource; track $index) {
+    <tr (click)="rowClick.emit(column)">
+      @for (row of displayedColumns; track $index) {
+      <td>{{ column[row] }}</td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>
